@@ -12,6 +12,21 @@ st.markdown(f"**User:** {UserProfile.NAME} | **Location:** {UserProfile.LOCATION
 # Sidebar for configuration
 st.sidebar.header("Configuration")
 
+# Resume Upload
+uploaded_resume = st.sidebar.file_uploader("Upload your Resume (PDF)", type="pdf")
+resume_path = None
+
+if uploaded_resume is not None:
+    # Save uploaded file temporarily
+    resume_path = os.path.join(os.getcwd(), "uploaded_resume.pdf")
+    with open(resume_path, "wb") as f:
+        f.write(uploaded_resume.getbuffer())
+    st.sidebar.success("✅ Resume uploaded!")
+    # Update UserProfile path dynamically (hack for now, ideally pass path to run_job_agent)
+    UserProfile.RESUME_PATH = resume_path
+else:
+    st.sidebar.warning("⚠️ Please upload your resume.")
+
 default_keywords = "Data Scientist, Machine Learning Engineer, AI Engineer"
 keywords_input = st.sidebar.text_area("Keywords (comma separated)", default_keywords)
 keywords = [k.strip() for k in keywords_input.split(",")]
@@ -20,19 +35,13 @@ default_locations = "Hyderabad, Bangalore, Pune, Remote"
 locations_input = st.sidebar.text_area("Locations (comma separated)", default_locations)
 locations = [l.strip() for l in locations_input.split(",")]
 
-resume_exists = os.path.exists(UserProfile.RESUME_PATH)
-if resume_exists:
-    st.sidebar.success(f"✅ Resume found: {UserProfile.RESUME_PATH}")
-else:
-    st.sidebar.error(f"❌ Resume not found at {UserProfile.RESUME_PATH}")
-
 # Main area
 col1, col2 = st.columns(2)
 
 with col1:
     if st.button("🔍 Search Jobs", type="primary"):
-        if not resume_exists:
-            st.error("Please add your resume file before searching.")
+        if not resume_path:
+            st.error("Please upload your resume file before searching.")
         else:
             with st.status("Searching for jobs...", expanded=True) as status:
                 st.write("Initializing browser...")
