@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Environment Variables (Sensitive!)
+.env
+
+# Browser Data (Sensitive & Large)
+browser_profile/
+
+# Data & Artifacts
+job_results.csv
+debug_screenshot.png
+Resume.pdf
+resume.pdf
+
+# IDE
+.vscode/
+.idea/
