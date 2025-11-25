@@ -21,6 +21,7 @@ Built with **Python**, **Playwright**, and **Streamlit**.
 - **Python 3.8+** installed.
 - **Google Chrome** browser installed.
 - **LinkedIn Account**.
+- **streamlit
 
 ## 📥 Installation
 
@@ -65,6 +66,4 @@ Built with **Python**, **Playwright**, and **Streamlit**.
 
 > **Note**: On the first run, you might need to manually solve a CAPTCHA or enter an OTP in the opened Chrome window. The agent will remember your session for next time.
 
-## ⚠️ Disclaimer
 
-**Use with Caution**: Automated scraping and applying may violate LinkedIn's Terms of Service. This tool is for educational purposes. The author is not responsible for any account restrictions or bans. Use at your own risk.
